@@ -20,5 +20,5 @@ module.exports = {
     updateType: 1, // 监视的类型，0，定时监视 1：文件更改后定时发送
     interval: 0.5 * 60 * 1000 // 时间
   },
-  ignore: [/\.DS_Store/, /Thumbs.db/] // 忽略列表
+  ignore: [/\.DS_Store/, /Thumbs\.db/] // 忽略列表
 }
