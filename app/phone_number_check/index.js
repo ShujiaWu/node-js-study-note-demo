@@ -23,35 +23,35 @@ let arr = []
 
 // 查询
 let query = phoneNumber => {
-	request(
-		{
-			url: `http://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel=${phoneNumber}`,
-			encoding: null, // 直接输出 Buffer
-			gzip: true
-		},
-		(error, response, body) => {
-			if (!error && response.statusCode == 200) {
-				try {
-					let obj = eval(iconv.decode(body, 'gb2312'))
-					console.log(`${obj.telString} --- ${obj.catName} --- ${obj.carrier}`)
-				} catch (e) {
-					console.log(e)
-				}
-			}
-		}
-	)
+  request(
+    {
+      url: `http://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel=${phoneNumber}`,
+      encoding: null, // 直接输出 Buffer
+      gzip: true
+    },
+    (error, response, body) => {
+      if (!error && response.statusCode == 200) {
+        try {
+          let obj = eval(iconv.decode(body, 'gb2312'))
+          console.log(`${obj.telString} --- ${obj.catName} --- ${obj.carrier}`)
+        } catch (e) {
+          console.log(e)
+        }
+      }
+    }
+  )
 }
 
 let lr = new LineByLineReader('phone.txt', {
-	encoding: 'utf8',
-	skipEmptyLines: false
+  encoding: 'utf8',
+  skipEmptyLines: false
 })
 lr.on('line', line => {
-	arr.push(line)
+  arr.push(line)
 })
 lr.on('end', () => {
-	// 输出测试
-	arr.forEach(element => {
-		query(element)
-	}, this)
+  // 输出测试
+  arr.forEach(element => {
+    query(element)
+  }, this)
 })
